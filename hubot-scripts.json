@@ -1,6 +1,5 @@
 ["redis-brain.coffee",
   "shipit.coffee",
-  "9gag.coffee",
   "abstract.coffee",
   "achievement_unlocked.coffee",
   "advice.coffee",
