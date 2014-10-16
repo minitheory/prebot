@@ -24,7 +24,8 @@
     "hubot": ">= 2.6.0 < 3.0.0",
     "hubot-hipchat": "^2.7.5",
     "hubot-scripts": ">= 2.5.0 < 3.0.0",
-    "wolfram" : "*"
+    "wolfram" : "*",
+    "yelp" : "*"
   },
   "engines": {
     "node": ">= 0.8.x",
