@@ -21,13 +21,8 @@
   "hello.coffee",
   "meme_captain.coffee",
   "nice.coffee",
-  "pizza.coffee",
-  "play.coffee",
   "quote.coffee",
-  "random-user.coffee",
-  "sensitive.coffee",
   "spotify.coffee",
-  "stranger.coffee",
   "sudo.coffee",
   "take-the-blame.coffee",
   "tell.coffee",
@@ -37,6 +32,5 @@
   "wits.coffee",
   "wolfram.coffee",
   "xkcd.coffee",
-  "yelp.coffee",
-  "zombies.coffee"
+  "yelp.coffee"
   ]
