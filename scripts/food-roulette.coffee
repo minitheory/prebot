@@ -7,11 +7,12 @@
 # Author:
 #   weimeng
 
+key = process.env.GMAPS_API_KEY
+officeLocation = "1.279679,103.841821"
+
 fetchPlace = (msg) ->
   return msg.send "You need to set env.GMAPS_API_KEY to get location data" unless process.env.GMAPS_API_KEY?
 
-  key = process.env.GMAPS_API_KEY
-  officeLocation = "1.279679,103.841821"
   radius = 500
   types = "food"
 
@@ -31,7 +32,6 @@ fetchPlace = (msg) ->
     fetchPlaceDetails(msg, place.place_id)
 
 fetchPlaceDetails = (msg, placeId) ->
-  key = process.env.GMAPS_API_KEY
   url = "https://maps.googleapis.com/maps/api/place/details/json?" +
         "key=" + key +
         "&placeid=" + placeId
@@ -47,16 +47,16 @@ fetchPlaceDetails = (msg, placeId) ->
     details = place.name + " | Rating: " + place.rating + " | Website: " + place.website
 
     mapUrl   = "http://maps.google.com/maps/api/staticmap?markers=color:red%7C" +
-                "1.279679,103.841821" +
+                officeLocation +
                 "&markers=color:blue%7C" +
                 place.geometry.location.lat + "," + place.geometry.location.lng +
-                "&size=400x400&maptype=roadmap" +
-                "&sensor=false" +
+                "&size=400x400&maptype=roadmap&sensor=false" +
                 "&format=png" # So campfire knows it's an image
 
     directionsUrl = "http://maps.google.com/maps/dir/'" +
-                    "1.279679,103.841821" + "'/'" +
-                    place.geometry.location.lat + "," + place.geometry.location.lng + "'/"
+                    officeLocation + "'/'" +
+                    place.geometry.location.lat + "," +
+                    place.geometry.location.lng + "'/"
 
     msg.send mapUrl
     msg.send details + "\n Directions: " + directionsUrl
