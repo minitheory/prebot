@@ -40,7 +40,7 @@ fetchPlaceDetails = (msg, placeId) ->
     catch err
       return msg.send "I encountered an error."
 
-    details = place.name + " @ " + place.formatted_address + " | Rating: " + place.rating + " | Website: " + place.website
+    details = place.name + " | Rating: " + place.rating + " | Website: " + place.website
 
     mapUrl   = "http://maps.google.com/maps/api/staticmap?markers=color:red%7C" +
                 "1.279679,103.841821" +
@@ -54,7 +54,8 @@ fetchPlaceDetails = (msg, placeId) ->
                     "1.279679,103.841821" + "'/'" +
                     place.geometry.location.lat + "," + place.geometry.location.lng + "'/"
 
-    msg.send mapUrl + "\n" + details + "\n Directions: " + directionsUrl
+    msg.send mapUrl
+    msg.send details + "\n Directions: " + directionsUrl
 
 module.exports = (robot) ->
 
