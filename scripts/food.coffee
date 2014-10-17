@@ -7,7 +7,7 @@ fetchPlace = (msg) ->
   key = process.env.GMAPS_API_KEY
   officeLocation = "1.279679,103.841821"
   radius = 500
-  types = "food"
+  types = "bakery|bar|cafe|meal_takeaway|restaurant"
   maxPrice = 2 # Max: 4
 
   url = "https://maps.googleapis.com/maps/api/place/radarsearch/json?" +
