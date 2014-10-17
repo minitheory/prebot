@@ -52,11 +52,12 @@ fetchPlaceDetails = (msg, placeId) ->
                 "&sensor=false" +
                 "&format=png" # So campfire knows it's an image
     msg.send mapUrl
-    # url      = "http://maps.google.com/maps?q=" +
-    #            escape(location) +
-    #           "&hl=en&sll=37.0625,-95.677068&sspn=73.579623,100.371094&vpsrc=0&hnear=" +
-    #           escape(location) +
-    #           "&t=m&z=11"
+
+    directionsUrl = "http://maps.google.com/maps/dir/'" +
+                    "1.279679,103.841821" + "'/'" +
+                    place.geometry.location.lat + "," + place.geometry.location.lng + "'/"
+
+    msg.send "Directions: " + directionsUrl
 
 module.exports = (robot) ->
 
