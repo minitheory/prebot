@@ -38,7 +38,9 @@ fetchPlaceDetails = (msg, placeId) ->
     catch err
       return msg.send "I encountered an error."
 
-    msg.send place.name
+    details = "<h1>" + place.name + "</h1>"
+
+    msg.send details
 
 module.exports = (robot) ->
 
