@@ -42,8 +42,6 @@ fetchPlaceDetails = (msg, placeId) ->
 
     details = place.name + " @ " + place.formatted_address + " | Rating: " + place.rating + " | Website: " + place.website
 
-    msg.send details
-
     mapUrl   = "http://maps.google.com/maps/api/staticmap?markers=color:red%7C" +
                 "1.279679,103.841821" +
                 "&markers=color:blue%7C" +
@@ -51,13 +49,12 @@ fetchPlaceDetails = (msg, placeId) ->
                 "&size=400x400&maptype=roadmap" +
                 "&sensor=false" +
                 "&format=png" # So campfire knows it's an image
-    msg.send mapUrl
 
     directionsUrl = "http://maps.google.com/maps/dir/'" +
                     "1.279679,103.841821" + "'/'" +
                     place.geometry.location.lat + "," + place.geometry.location.lng + "'/"
 
-    msg.send "Directions: " + directionsUrl
+    msg.send mapUrl + "\n" + details + "\n Directions: " + directionsUrl
 
 module.exports = (robot) ->
 
