@@ -7,15 +7,13 @@ fetchPlace = (msg) ->
   key = process.env.GMAPS_API_KEY
   officeLocation = "1.279679,103.841821"
   radius = 500
-  types = "bakery|bar|cafe|meal_takeaway|restaurant"
-  maxPrice = 2 # Max: 4
+  types = "food"
 
   url = "https://maps.googleapis.com/maps/api/place/radarsearch/json?" +
         "key=" + key +
         "&location=" + officeLocation +
         "&radius=" + radius +
-        "&types=" + types +
-        "&maxprice=" + maxPrice
+        "&types=" + types
 
   msg.http(url).header("Accept", "application/json").get() (err, res, body) ->
     return msg.send "I encountered an error." if err
