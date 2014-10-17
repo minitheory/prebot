@@ -23,12 +23,12 @@ fetchPlace = (msg) ->
         "&types=" + types
 
   msg.http(url).header("Accept", "application/json").get() (err, res, body) ->
-    return msg.send "I encountered an error." if err
+    return msg.send "I couldn't search for nearby places! :(" if err
     try
       body = JSON.parse body
       place = msg.random body.results
     catch err
-      return msg.send "I encountered an error."
+      return msg.send "I couldn't parse the nearby places data! :("
     fetchPlaceDetails(msg, place.place_id)
 
 fetchPlaceDetails = (msg, placeId) ->
@@ -37,12 +37,12 @@ fetchPlaceDetails = (msg, placeId) ->
         "&placeid=" + placeId
 
   msg.http(url).header("Accept", "application/json").get() (err, res, body) ->
-    return msg.send "I encountered an error." if err
+    return msg.send "I couldn't fetch the location details! :(" if err
     try
       body = JSON.parse body
       place = body.result
     catch err
-      return msg.send "I encountered an error."
+      return msg.send "I couldn't parse the location details! :("
 
     details = place.name + " | Rating: " + place.rating + " | Website: " + place.website
 
