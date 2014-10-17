@@ -10,15 +10,12 @@ module.exports = (robot) ->
       radius = 500
       types = "food"
 
-      url = "https://maps.googleapis.com/maps/api/place/radarsearch/json?" +
-            "key=" + key +
-            "&location=" + officeLocation +
-            "&radius=" + 500 +
-            "&types=" + types
+      url = "https://maps.googleapis.com/maps/api/place/radarsearch/json"
 
-      msg.robot.http(url).get() (error, response, body) ->
-        data = JSON.parse(body)
-        place = data.results[Math.floor(Math.random() * data.results.length)]
+      msg.http(url).query(key: key, location: officeLocation, radius: radius, types: types)
+         .get() (err, res, body) ->
+            data = JSON.parse(body)
+            place = data.results[Math.floor(Math.random() * data.results.length)]
 
       msg.send place.place_id
     else
