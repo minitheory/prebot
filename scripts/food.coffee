@@ -22,7 +22,23 @@ fetchPlace = (msg) ->
       place = msg.random body.results
     catch err
       return msg.send "I encountered an error."
-    msg.send place
+    fetchPlaceDetails(msg, place.place_id)
+
+fetchPlaceDetails = (msg, placeId) ->
+  key = process.env.GMAPS_API_KEY
+  url = "https://maps.googleapis.com/maps/api/place/details/json?" +
+        "key=" + key +
+        "&placeid=" + placeId
+
+  msg.http(url).header("Accept", "application/json").get() (err, res, body) ->
+    return msg.send "I encountered an error." if err
+    try
+      body = JSON.parse body
+      place = body.result
+    catch err
+      return msg.send "I encountered an error."
+
+    msg.send place.name
 
 module.exports = (robot) ->
 
