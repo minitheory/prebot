@@ -47,7 +47,7 @@ fetchPlaceDetails = (msg, placeId) ->
     mapUrl   = "http://maps.google.com/maps/api/staticmap?markers=color:red%7C" +
                 "1.279679,103.841821" +
                 "&markers=color:blue%7C" +
-                place.geometry.location.lat + "," + place.geometry.location.long +
+                place.geometry.location.lat + "," + place.geometry.location.lng +
                 "&size=400x400&maptype=roadmap" +
                 "&sensor=false" +
                 "&format=png" # So campfire knows it's an image
