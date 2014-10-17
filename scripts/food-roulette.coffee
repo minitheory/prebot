@@ -1,5 +1,11 @@
 # Description:
 #   Picks a place for food so we don't have to!
+#
+# Commands:
+#   hubot lunch/dinner/supper - Queries Google for nearby places and returns a suitable place for a meal!
+#
+# Author:
+#   weimeng
 
 fetchPlace = (msg) ->
   return msg.send "You need to set env.GMAPS_API_KEY to get location data" unless process.env.GMAPS_API_KEY?
