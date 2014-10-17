@@ -38,7 +38,7 @@ fetchPlaceDetails = (msg, placeId) ->
     catch err
       return msg.send "I encountered an error."
 
-    details = place.name + " @ " + place.formatted_address + " | Rating: " + place.rating
+    details = place.name + " @ " + place.formatted_address + " | Rating: " + place.rating + " | Website: " + place.website
 
     msg.send details
 
