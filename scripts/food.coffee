@@ -3,5 +3,5 @@
 
 module.exports = (robot) ->
 
-robot.respond /(lunch|dinner|supper)/i, (msg) ->
-  msg.send "McDonald's for you!"
+  robot.respond /(lunch|dinner|supper)/i, (msg) ->
+    msg.send "McDonald's for you!"
