@@ -20,7 +20,6 @@ fetchArtWork = (msg) ->
         'keywords='+ keyword +
         '&sort_on=score&sort_order=down&api_key=' + key +
         '&includes=MainImage'
-  msg.send url
   msg.http(url).get() (err, res, body) ->
     return msg.send "I couldn't find any art piece for that! :(" if err
 
@@ -30,8 +29,11 @@ fetchArtWork = (msg) ->
     catch err
       return "I couldn't parse art piece result for that! :("
 
-    piece = listings[Math.floor(Math.random() * listings.length)]
+    try
+      piece = listings[Math.floor(Math.random() * listings.length)]
+      artwork = piece.MainImage.url_170x135
     msg.send piece.title
+    msg.send artwork
     msg.send piece.url
 
 module.exports = (robot) ->
@@ -40,5 +42,4 @@ module.exports = (robot) ->
     robot.logger.warning 'The ETSY_API_KEY environment variable not set'
 
   robot.respond /art me (.*)/i, (msg) ->
-    msg.send 'start'
     fetchArtWork(msg)
