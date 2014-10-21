@@ -31,3 +31,4 @@ module.exports = (robot) ->
     robot.logger.warning 'The ETSY_API_KEY environment variable not set'
 
   robot.respond /art me (.*)/i, (msg) ->
+    fetchArtWork(msg)
