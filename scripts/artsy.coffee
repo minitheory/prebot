@@ -18,7 +18,8 @@ fetchArtWork = (msg) ->
   keyword = encodeURIComponent(msg.match[1].trim())
   url = 'https://openapi.etsy.com/v2/public/listings/active?'+
         'keywords='+ keyword +
-        '&sort_on=score&sort_order=down&api_key=' + key
+        '&sort_on=score&sort_order=down&api_key=' + key +
+        '&includes=MainImage'
   msg.send url
   msg.http(url).get() (err, res, body) ->
     return msg.send "I couldn't find any art piece for that! :(" if err
