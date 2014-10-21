@@ -19,7 +19,7 @@ keyword = ""
 
 
 fetchArtWorkFromEtsy = (msg) ->
-  keyword = encodeURIComponent(msg.match[1].trim())
+  
   url_etsy = 'https://openapi.etsy.com/v2/public/listings/active?'+
   'keywords='+ keyword +
   '&sort_on=created&sort_order=down&api_key=' + key +
@@ -43,9 +43,9 @@ fetchArtWorkFromEtsy = (msg) ->
     msg.send piece.url
 
 fetchArtWorkFromArtsy = (msg) ->
+  url_artsy = 'https://api.artsy.net/api/search?q='+ keyword +
+  '+more:pagemap:metatags-og_type:artwork'
 
-  url_artsy = 'https://api.artsy.net/api/search?q='+
-  keyword + '+more:pagemap:metatags-og_type:artwork'
   url_artsy_token = 'https://api.artsy.net/api/tokens/xapp_token?'+
   'client_id='+ key_artsy +
   '&client_secret=' + secret_artsy
@@ -75,10 +75,12 @@ fetchArtWorkFromArtsy = (msg) ->
         msg.send piece._links.permalink.href
 
 fetchArtWork = (msg) ->
-  fetchArtWorkFromArtsy(msg)
+
   fetchArtWorkFromEtsy(msg)
+  fetchArtWorkFromArtsy(msg)
 
 module.exports = (robot) ->
+
   unless key?
     robot.logger.warning 'The ETSY_API_KEY environment variable not set'
   unless key_artsy?
