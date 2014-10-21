@@ -2,7 +2,7 @@
 #   Find a art piece on Etsy by keyword.
 #
 # Commands:
-#   hubot art me <query>
+#   hubot art me <query> - Show me etsy art work by keyword
 #
 # Configuration:
 #   ETSY_API_KEY - Etsy api key
