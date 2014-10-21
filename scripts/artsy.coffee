@@ -73,11 +73,8 @@ fetchArtWorkFromArtsy = (msg) ->
         msg.send piece._links.permalink.href
 
 fetchArtWork = (msg) ->
-  selection = Math.floor(Math.random() * 2)
-  if selection is 0
-    fetchArtWorkFromArtsy(msg)
-  if selection is 1
-    fetchArtWorkFromEtsy(msg)
+  fetchArtWorkFromArtsy(msg)
+  fetchArtWorkFromEtsy(msg)
 
 module.exports = (robot) ->
   unless key?
