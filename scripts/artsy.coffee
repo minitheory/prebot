@@ -45,6 +45,8 @@ fetchArtWork = (msg) ->
         try
           piece = listings[Math.floor(Math.random() * listings.length)]
           artwork = piece._links.thumbnail.href + "&format=png"
+        catch err
+          return msg.send "couldn't get the art details! :("
         msg.send piece.title
         msg.send artwork
         msg.send piece._links.permalink.href
@@ -60,6 +62,8 @@ fetchArtWork = (msg) ->
     try
       piece = listings[Math.floor(Math.random() * listings.length)]
       artwork = piece.MainImage.url_570xN
+    catch err
+      return msg.send "couldn't get the art details! :("
     msg.send piece.title
     msg.send artwork
     msg.send piece.url
