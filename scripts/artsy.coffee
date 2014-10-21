@@ -21,11 +21,17 @@ fetchArtWork = (msg) ->
         '&sort_on=score&sort_order=down&api_key=' + key
   msg.send url
   msg.http(url).get() (err, res, body) ->
-    listings = JSON.parse(body).results
-    msg.send listings
-    unless listings?
-      piece = listings[Math.floor(Math.random() * listings.length)];
-      msg.send piece
+    return msg.send "I couldn't find any art piece for that! :(" if err
+
+    try
+      listings = JSON.parse(body).results
+      msg.send listings
+    catch err
+      return "I couldn't parse art piece result for that! :("
+
+    piece = listings[Math.floor(Math.random() * listings.length)]
+    msg.send piece.title
+    msg.send piece.url
 
 module.exports = (robot) ->
 
