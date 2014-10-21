@@ -30,7 +30,7 @@ fetchArtWork = (msg) ->
 
     try
       piece = listings[Math.floor(Math.random() * listings.length)]
-      artwork = piece.MainImage.url_170x135
+      artwork = piece.MainImage.url_570xN
     msg.send piece.title
     msg.send artwork
     msg.send piece.url
