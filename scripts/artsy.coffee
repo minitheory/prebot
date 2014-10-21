@@ -15,6 +15,8 @@
 key = process.env.ETSY_API_KEY
 key_artsy = process.env.ARTSY_API_KEY
 secret_artsy = process.env.ARTSY_API_SECRET
+keyword = ""
+
 
 fetchArtWorkFromEtsy = (msg) ->
   keyword = encodeURIComponent(msg.match[1].trim())
@@ -41,7 +43,7 @@ fetchArtWorkFromEtsy = (msg) ->
     msg.send piece.url
 
 fetchArtWorkFromArtsy = (msg) ->
-  keyword = encodeURIComponent(msg.match[1].trim())
+
   url_artsy = 'https://api.artsy.net/api/search?q='+
   keyword + '+more:pagemap:metatags-og_type:artwork'
   url_artsy_token = 'https://api.artsy.net/api/tokens/xapp_token?'+
@@ -85,4 +87,5 @@ module.exports = (robot) ->
     robot.logger.warning 'The ARTSY_API_SECRET environment variable not set'
 
   robot.respond /art me (.*)/i, (msg) ->
+    keyword = encodeURIComponent(msg.match[1].trim())
     fetchArtWork(msg)
