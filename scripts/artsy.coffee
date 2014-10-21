@@ -37,7 +37,7 @@ fetchArtWork = (msg) ->
     msg.http(url_artsy)
       .headers('X-XAPP-Token': token)
       .get() (err, res, body) ->
-        return msg.send "I couldn't find any art piece on artsy for that! :("
+        return msg.send "I couldn't find any art piece on artsy for that! :(" if err
         try
           listings = JSON.parse(body)._embedded.results
         catch err
