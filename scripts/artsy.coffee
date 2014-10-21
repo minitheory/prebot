@@ -19,7 +19,7 @@ fetchArtWork = (msg) ->
   url = 'https://openapi.etsy.com/v2/public/listings/active?'+
         'keywords='+ keyword +
         '&sort_on=score&sort_order=down&api_key=' + key
-  console.log(url)
+  console.error(url)
   msg.http(url).get() (err, res, body) ->
     listings = JSON.parse(body).results
     unless listings?
