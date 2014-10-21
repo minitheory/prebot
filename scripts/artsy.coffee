@@ -35,7 +35,7 @@ fetchArtWork = (msg) ->
       catch err
         return msg.send  "I couldn't get the token for artsy :("
       msg.http(url_artsy)
-        .headers(X-XAPP-Token: token)
+        .headers('X-XAPP-Token': token)
         .get() (err, res, body) ->
           return msg.send "I couldn't find any art piece on artsy for that! :("
           try
