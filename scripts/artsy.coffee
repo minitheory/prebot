@@ -19,9 +19,10 @@ fetchArtWork = (msg) ->
   url = 'https://openapi.etsy.com/v2/public/listings/active?'+
         'keywords='+ keyword +
         '&sort_on=score&sort_order=down&api_key=' + key
-  console.error(url)
+  msg.send url
   msg.http(url).get() (err, res, body) ->
     listings = JSON.parse(body).results
+    msg.send listings
     unless listings?
       piece = listings[Math.floor(Math.random() * listings.length)];
       msg.send piece
@@ -32,4 +33,5 @@ module.exports = (robot) ->
     robot.logger.warning 'The ETSY_API_KEY environment variable not set'
 
   robot.respond /art me (.*)/i, (msg) ->
+    msg.send 'start'
     fetchArtWork(msg)
