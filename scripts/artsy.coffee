@@ -25,7 +25,6 @@ fetchArtWork = (msg) ->
 
     try
       listings = JSON.parse(body).results
-      msg.send listings
     catch err
       return "I couldn't parse art piece result for that! :("
 
