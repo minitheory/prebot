@@ -16,40 +16,12 @@ key = process.env.ETSY_API_KEY
 key_artsy = process.env.ARTSY_API_KEY
 secret_artsy = process.env.ARTSY_API_SECRET
 
-fetchArtWork = (msg) ->
+fetchArtWorkFromEtsy = (msg) ->
   keyword = encodeURIComponent(msg.match[1].trim())
   url_etsy = 'https://openapi.etsy.com/v2/public/listings/active?'+
   'keywords='+ keyword +
   '&sort_on=created&sort_order=down&api_key=' + key +
   '&includes=MainImage'
-  url_artsy = 'https://api.artsy.net/api/search?q='+
-  keyword + '+more:pagemap:metatags-og_type:artwork'
-  url_artsy_token = 'https://api.artsy.net/api/tokens/xapp_token?'+
-  'client_id='+ key_artsy +
-  '&client_secret=' + secret_artsy
-
-  msg.http(url_artsy_token).post() (err, res, body) ->
-    return msg.send "I couldn't get token on artsy! :(" if err
-    try
-      token = JSON.parse(body).token
-    catch err
-      return msg.send  "I couldn't get the token for artsy :("
-    msg.http(url_artsy)
-      .headers('X-XAPP-Token': token)
-      .get() (err, res, body) ->
-        return msg.send "I couldn't find any art piece on artsy for that! :(" if err
-        try
-          listings = JSON.parse(body)._embedded.results
-        catch err
-          return msg.send "I couldn't parse art piece result for that! :("
-        try
-          piece = listings[Math.floor(Math.random() * listings.length)]
-          artwork = piece._links.thumbnail.href + "&format=png"
-        catch err
-          return msg.send "couldn't get the art details! :("
-        msg.send piece.title
-        msg.send artwork
-        msg.send piece._links.permalink.href
 
   msg.http(url_etsy).get() (err, res, body) ->
     return msg.send "I couldn't find any art piece on etsy for that! :(" if err
@@ -68,8 +40,46 @@ fetchArtWork = (msg) ->
     msg.send artwork
     msg.send piece.url
 
-module.exports = (robot) ->
+fetchArtWorkFromArtsy = (msg) ->
+  keyword = encodeURIComponent(msg.match[1].trim())
+  url_artsy = 'https://api.artsy.net/api/search?q='+
+  keyword + '+more:pagemap:metatags-og_type:artwork'
+  url_artsy_token = 'https://api.artsy.net/api/tokens/xapp_token?'+
+  'client_id='+ key_artsy +
+  '&client_secret=' + secret_artsy
 
+  msg.http(url_artsy_token).post() (err, res, body) ->
+    return msg.send "I couldn't get token on artsy! :(" if err
+    try
+      token = JSON.parse(body).token
+    catch err
+      return msg.send  "I couldn't get the token for artsy :("
+    msg.http(url_artsy)
+      .headers('X-XAPP-Token': token)
+      .get() (err, res, body) ->
+        return msg.send
+        "I couldn't find any art piece on artsy for that! :(" if err
+        try
+          listings = JSON.parse(body)._embedded.results
+        catch err
+          return msg.send "I couldn't parse art piece result for that! :("
+        try
+          piece = listings[Math.floor(Math.random() * listings.length)]
+          artwork = piece._links.thumbnail.href + "&format=png"
+        catch err
+          return msg.send "couldn't get the art details! :("
+        msg.send piece.title
+        msg.send artwork
+        msg.send piece._links.permalink.href
+
+fetchArtWork = (msg) ->
+  select = Math.floor(Math.random() * 2)
+  if select == 0
+    fetchArtWorkFromArtsy(msg)
+  else if select == 1
+    fetchArtWorkFromEtsy(msg)
+
+module.exports = (robot) ->
   unless key?
     robot.logger.warning 'The ETSY_API_KEY environment variable not set'
   unless key_artsy?
