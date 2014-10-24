@@ -9,7 +9,7 @@
 
 fetchQuote = (msg) ->
   msg.http("http://quotesondesign.com/api/3.0/api-3.0.json")
-  .get(err, res, body) ->
+  .get() (err, res, body) ->
 
     msg.send err
 
