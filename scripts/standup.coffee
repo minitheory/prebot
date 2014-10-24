@@ -11,13 +11,10 @@ fetchQuote = (msg) ->
   msg.http("http://quotesondesign.com/api/3.0/api-3.0.json")
   .get() (err, res, body) ->
 
-    msg.send err
-
     return msg.send "I’m taking MC today :(" if err
 
     try
       quote = JSON.parse(body)
-      msg.send quote
     catch err
       return msg.send "I’m taking MC today :("
 
