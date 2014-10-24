@@ -25,5 +25,5 @@ fetchQuote = (msg) ->
 
 module.exports = (robot) ->
 
-  robot.hear /standup|stand up/i, (msg) ->
+  robot.respond /standup|stand up/i, (msg) ->
     fetchQuote(msg)
