@@ -2,7 +2,7 @@
 #   Daily Standup
 #
 # Commands:
-#   standup - Listens for "standup" keyword and send a random response
+#   standup/stand up - Respond for "standup"/"stand up" keywords and send a random response
 #
 # Author:
 #   Zenan
