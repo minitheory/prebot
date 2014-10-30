@@ -5,12 +5,12 @@
 #   weimeng
 
 TIMEZONE = "Asia/Singapore"
-ROOM = "Dev Hangout!"
+ROOM = "35061_daily_standup@conf.hipchat.com"
 
-SCHEDULE = "*/5 * * * *"
+SCHEDULE = "* */5 * * * *"
 
 cronJob = require('cron').CronJob
 
 module.exports = (robot) ->
   daily_standup = new cronJob SCHEDULE, ->
-    robot.messageRoom ROOM, "Ding", null, true, TIMEZONE
+    robot.messageRoom ROOM, "Hi!"
