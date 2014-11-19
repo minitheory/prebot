@@ -13,6 +13,6 @@ cronJob = require('cron').CronJob
 
 module.exports = (robot) ->
   daily_standup = new cronJob STANDUP_SCHEDULE, ->
-    robot.messageRoom STANDUP_ROOM, "@all Time to do our daily standup!"
+    robot.messageRoom STANDUP_ROOM, "@all Time to do our daily standup! Give a quick update on: (1) what you did yesterday, (2) what you will do today, (3) any obstacles/issues blocking your progress."
     return
   , null, true, TIMEZONE
