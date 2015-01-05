@@ -9,7 +9,7 @@ TIMEZONE = "Asia/Singapore"
 STANDUP_ROOM = "daily-standup"
 STANDUP_SCHEDULE = "0 30 10 * * 2-6"
 
-cronJob = require('cron').CronJob
+cronJob = require("cron").CronJob
 
 module.exports = (robot) ->
   daily_standup = new cronJob STANDUP_SCHEDULE, ->
