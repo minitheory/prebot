@@ -7,7 +7,7 @@
 TIMEZONE = "Asia/Singapore"
 
 STANDUP_ROOM = "daily-standup"
-STANDUP_SCHEDULE = "0 30 10 * * 2-6"
+STANDUP_SCHEDULE = "0 30 9 * * 2-6"
 
 cronJob = require("cron").CronJob
 
